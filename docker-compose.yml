@@ -1,4 +1,4 @@
-version: 3
+version: '3.8'
 
 services:
   zookeeper:
@@ -32,7 +32,7 @@ services:
   
 
   weather_producer:
-    build: ./weather_producer
+    build: .
     depends_on:
       - kafka
     environment:
@@ -40,7 +40,7 @@ services:
       NOAA_TOKEN: ${NOAA_TOKEN}
 
   weather_consumer:
-    build: ./weather_consumer
+    build: .
     depends_on:
       - kafka
       - postgres
@@ -54,7 +54,8 @@ services:
   web_app:
     build: .
     command: uvicorn web_app:app --host 0.0.0.0 --port 8000 --reload
-    ports: "8000:8000"
+    ports: 
+      - "8000:8000"
     depends_on:
       - postgres
     environment:
