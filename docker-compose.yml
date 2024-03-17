@@ -17,3 +17,36 @@ services:
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEPER_CONNECT: zookeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+    
+    postgres:
+      image: postgres:latest
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_DB: weather_data
+        POSTGRES_USER: user
+        POSTGRES_PASSWORD: password
+    
+
+    weather_producer:
+      build: ./weather_producer
+      depends_on:
+        - kafka
+      environment:
+        KAFKA_BROKER_URL: kafka:9092
+        API_KEY: your_openweathermap_api_key
+
+    weather_consumer:
+      bubild: ./weather_consumer
+      depends_on:
+        - kafka
+        - postgres
+      environment:
+        KAFKA_BROKER_URL: kafka:9092
+        POSTGRES_HOST: postgres
+        POSTGRES_USER: user
+        POSTGRES_PASSWORD: password
+        POSTGRES_DB: weather_data
