@@ -27,8 +27,8 @@ services:
         - "5432:5432"
       environment:
         POSTGRES_DB: weather_data
-        POSTGRES_USER: user
-        POSTGRES_PASSWORD: password
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     
 
     weather_producer:
@@ -37,7 +37,7 @@ services:
         - kafka
       environment:
         KAFKA_BROKER_URL: kafka:9092
-        API_KEY: your_openweathermap_api_key
+        NOAA_TOKEN: ${NOAA_TOKEN}
 
     weather_consumer:
       bubild: ./weather_consumer
@@ -47,6 +47,6 @@ services:
       environment:
         KAFKA_BROKER_URL: kafka:9092
         POSTGRES_HOST: postgres
-        POSTGRES_USER: user
-        POSTGRES_PASSWORD: password
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
         POSTGRES_DB: weather_data
