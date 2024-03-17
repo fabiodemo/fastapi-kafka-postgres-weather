@@ -1,8 +1,8 @@
 version: 3
 
 services:
-  zookeper:
-    image: zookeper:latest
+  zookeeper:
+    image: zookeeper:latest
     ports:
       - "2181:2181"
 
@@ -16,7 +16,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT, OUTSIDE:PLAINTEXT
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEPER_CONNECT: zookeper:2181
+      KAFKA_ZOOKEPEeR_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
