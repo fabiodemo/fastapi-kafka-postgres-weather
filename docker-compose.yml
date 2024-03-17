@@ -16,7 +16,7 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT, OUTSIDE:PLAINTEXT
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEPEeR_CONNECT: zookeeper:2181
+      KAFKA_ZOOKEPEER_CONNECT: zookeeper:2181
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -40,7 +40,7 @@ services:
       NOAA_TOKEN: ${NOAA_TOKEN}
 
   weather_consumer:
-    bubild: ./weather_consumer
+    build: ./weather_consumer
     depends_on:
       - kafka
       - postgres
