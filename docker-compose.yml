@@ -21,32 +21,32 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
     
-    postgres:
-      image: postgres:latest
-      ports:
-        - "5432:5432"
-      environment:
-        POSTGRES_DB: weather_data
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: weather_data
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  
 
-    weather_producer:
-      build: ./weather_producer
-      depends_on:
-        - kafka
-      environment:
-        KAFKA_BROKER_URL: kafka:9092
-        NOAA_TOKEN: ${NOAA_TOKEN}
+  weather_producer:
+    build: ./weather_producer
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BROKER_URL: kafka:9092
+      NOAA_TOKEN: ${NOAA_TOKEN}
 
-    weather_consumer:
-      bubild: ./weather_consumer
-      depends_on:
-        - kafka
-        - postgres
-      environment:
-        KAFKA_BROKER_URL: kafka:9092
-        POSTGRES_HOST: postgres
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-        POSTGRES_DB: weather_data
+  weather_consumer:
+    bubild: ./weather_consumer
+    depends_on:
+      - kafka
+      - postgres
+    environment:
+      KAFKA_BROKER_URL: kafka:9092
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: weather_data
