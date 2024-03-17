@@ -17,7 +17,7 @@ def store_weather_data(weather_data):
     conn = psycopg2.connect(host=POSTGRES_HOST, user=POSTGRES_USER,
                             password=POSTGRES_PASSWORD, dbname=POSTGRES_DB)
     cur = conn.cursor()
-    cur.execute(f"INSERT INTO weather (data) VALUES {json.dumps(weather_data)}")
+    cur.execute("INSERT INTO weather (data) VALUES (%s)", (json.dumps(weather_data),))
     conn.commit()
     cur.close()
     conn.close()

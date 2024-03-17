@@ -9,7 +9,7 @@ from kafka import KafkaProducer
 KAFKA_BROKER_URL = 'kafka:9092'
 
 NOAA_TOKEN = os.environ.get('NOAA_TOKEN')
-topic = 'weather_data'
+TOPIC = 'weather_data'
 
 producer = KafkaProducer(bootstrap_servers=KAFKA_BROKER_URL,
                          value_serializer=lambda v: json.dumps(v).encode('utf'))

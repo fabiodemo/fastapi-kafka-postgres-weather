@@ -17,7 +17,7 @@ def read_root():
                             password=POSTGRES_PASSWORD, dbname=POSTGRES_DB)
     cur = conn.cursor()
     cur.execute("SELECT data FROM weather ORDER BY id DESC LIMIT 10")
-    weather_data = [json.load(row[0]) for row in cur.fetchall()]
+    weather_data = [json.loads(row[0]) for row in cur.fetchall()]
     cur.close()
     conn.close()
     return {"weather_data": weather_data}
