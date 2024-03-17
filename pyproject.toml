@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "fastapi-kafka-postgres-weather"
+version = "0.1.0"
+description = "Packages necessary to run fastapi-kafka-postgre-weather project"
+authors = ["fabiodemo <faberdemo@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12"
+fastapi = "^0.110.0"
+uvicorn = "^0.28.0"
+psycopg2-binary = "^2.9.9"
+kafka-python = "^2.0.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
