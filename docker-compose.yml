@@ -50,3 +50,15 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: weather_data
+
+  web_app:
+    build: .
+    command: uvicorn web_app:app --host 0.0.0.0 --port 8000 --reload
+    ports: "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: weather_data
