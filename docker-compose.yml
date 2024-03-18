@@ -38,7 +38,7 @@ services:
     environment:
       KAFKA_BROKER_URL: kafka:9092
       NOAA_TOKEN: ${NOAA_TOKEN}
-    command: ["python", "weather_producer.py"]
+    command: ["./wait-for-it.sh", "kafka:9092", "--", "python", "weather_producer.py"]
 
   weather_consumer:
     build: .
@@ -51,7 +51,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: weather_data
-    command: ["python", "weather_consumer.py"]
+    command: ["./wait-for-it.sh", "kafka:9092", "--", "python", "weather_consumer.py"]
 
   web_app:
     build: .
