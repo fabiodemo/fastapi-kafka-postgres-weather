@@ -7,7 +7,6 @@ from kafka import KafkaProducer
 
 
 KAFKA_BROKER_URL = 'kafka:9092'
-
 NOAA_TOKEN = os.environ.get('NOAA_TOKEN')
 TOPIC = 'weather_data'
 
