@@ -4,6 +4,9 @@ import json
 import requests
 from time import sleep
 from kafka import KafkaProducer
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 
 KAFKA_BROKER_URL = 'kafka:9092'
@@ -33,6 +36,6 @@ if __name__ == '__main__':
     while True:
         weather_data = fetch_weather_data()
         if weather_data:
-            producer.send(TOPIC, value=weather_data)
+            producer.send(TOPIC, value=weather_data).get(timeout=30)
             print(f"Sent weather data to Kafka: {weather_data}")
         sleep(60)

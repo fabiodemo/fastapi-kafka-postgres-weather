@@ -41,6 +41,7 @@ services:
       KAFKA_BROKER_URL: kafka:9092
       NOAA_TOKEN: ${NOAA_TOKEN}
     command: ["./wait-for-it.sh", "kafka:9092", "--", "python", "weather_producer.py"]
+    
 
   weather_consumer:
     build: .

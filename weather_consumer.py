@@ -2,6 +2,9 @@ import os
 import json
 import psycopg2
 from kafka import KafkaConsumer
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 
 KAFKA_BROKER_URL = 'kafka:9092'
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST')
@@ -10,7 +13,9 @@ POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 POSTGRES_DB = os.environ.get('POSTGRES_DB')
 
 consumer = KafkaConsumer('weather_data', bootstrap_servers=KAFKA_BROKER_URL,
-                         value_deserializer=lambda x: json.loads(x.decode('utf8')))
+                         value_deserializer=lambda x: json.loads(x.decode('utf8')),
+                         log_level='DEBUG'
+                        )
 
 
 def store_weather_data(weather_data):
