@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 
-KAFKA_BROKER_URL = 'kafka:9092'
+KAFKA_BROKER_URL = os.environ.get('KAFKA_BROKER_URL', 'kafka:9092')
 NOAA_TOKEN = os.environ.get('NOAA_TOKEN')
 TOPIC = 'weather_data'
 
@@ -34,6 +34,7 @@ def fetch_weather_data():
 
 if __name__ == '__main__':
     while True:
+        print(f'NOAA_TOKEN {NOAA_TOKEN}')
         weather_data = fetch_weather_data()
         if weather_data:
             producer.send(TOPIC, value=weather_data).get(timeout=30)
