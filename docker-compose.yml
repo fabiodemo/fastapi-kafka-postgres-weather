@@ -2,23 +2,32 @@ version: '3.8'
 
 services:
   zookeeper:
-    image: zookeeper:latest
-    ports:
-      - "2181:2181"
-
+    image: wurstmeister/zookeeper:3.4.6
+    expose:
+      - "2181"
+    tmpfs:
+      - /opt/zookeeper-3.4.6/data
 
   kafka:
     image: wurstmeister/kafka:latest
-    ports:
-      - "9092:9092"
+    depends_on:
+      - zookeeper
+    expose:
+      - 9092
+    tmpfs:
+      - /kafka
     environment:
-      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://localhost:9094,OUTSIDE://kafka:9092
+      KAFKA_LISTENERS: INSIDE://:9094,OUTSIDE://:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      # KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      LOG4J_LOGGER_KAFKA_AUTHORIZER_LOGGER: DEBUG, authorizerAppender
+    healthcheck:
+      test: ["CMD", "kafka-topics.sh", "--list", "--zookeeper", "zookeeper:2181"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
 
     

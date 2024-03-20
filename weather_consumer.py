@@ -13,9 +13,7 @@ POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 POSTGRES_DB = os.environ.get('POSTGRES_DB')
 
 consumer = KafkaConsumer('weather_data', bootstrap_servers=KAFKA_BROKER_URL,
-                         value_deserializer=lambda x: json.loads(x.decode('utf8')),
-                         log_level='DEBUG'
-                        )
+                         value_deserializer=lambda x: json.loads(x.decode('utf8')))
 
 
 def store_weather_data(weather_data):
