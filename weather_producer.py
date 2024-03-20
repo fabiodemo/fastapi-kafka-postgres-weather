@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 
-KAFKA_BROKER_URL = os.environ.get('KAFKA_BROKER_URL', 'kafka:29092')
+KAFKA_BROKER_URL = os.environ.get('KAFKA_BROKER_URL', 'kafka:9092')
 NOAA_TOKEN = os.environ.get('NOAA_TOKEN')
 TOPIC = 'weather_data'
 
