@@ -28,7 +28,3 @@ chmod +x wait-for-it.sh
 - **Data Security**:
   - Implementing encryption mechanisms to protect sensitive data both at rest and in transit within the data pipeline.
   - Implementing access control mechanisms to restrict data access to authorized users and roles, adhering to the principle of least privilege.
-
-- **Documentation and Knowledge Sharing**:
-  - Maintaining comprehensive documentation for the codebase, infrastructure setup, and data pipeline architecture to facilitate onboarding and collaboration among team members.
-  - Encouraging knowledge sharing within the team through code reviews, tech talks, and documentation contributions to foster continuous learning and improvement.
