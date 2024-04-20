@@ -16,7 +16,6 @@ jobs:
       id: vars
       run: echo "IMAGE_TAG=username/app_py311:$(date +%s)" >> $GITHUB_ENV
 
-
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag $IMAGE_TAG
 
@@ -25,3 +24,4 @@ jobs:
 
     - name: Push Docker Image
       run: docker push $IMAGE_TAG
+
