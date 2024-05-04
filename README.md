@@ -1,4 +1,4 @@
-# fastapi-kafka-postgres-weather
+# FastAPI Kafka Postgres Weather
 
 
 It will be necessary to request a token [on the official website from NOAA](
